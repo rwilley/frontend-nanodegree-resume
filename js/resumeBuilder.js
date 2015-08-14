@@ -114,13 +114,13 @@ var projects = {
 		"title": "Webpage",
 		"dates": "2015",
 		"description": "Udacity P1",
-		"images": "http://placehold.it/350x150"
+		"images": ["http://placehold.it/350x150"]
 		},
 		{ 
 		"title": "placeholder",
 		"dates": "2015",
 		"description": "placeholder",
-		"images": "http://placehold.it/350x150"
+		"images": ["http://placehold.it/350x150"]
 		}
 	]
 };
