@@ -16,7 +16,7 @@ var bio = {
 		"mobile": "612-226-8448",
 		"email": "rwilleyart@gmail.com",
 		"github": "rwilley",
-		"twitter": "rwilley",
+		"twitter": "@rwilley",
 		"location": "Washington, DC"
 	},
 	"skills": [
@@ -40,7 +40,11 @@ bio.display = function(){
 	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
 	$("#topContacts").append(formattedEmail);
 	var formattedGit = HTMLgithub.replace("%data%", bio.contacts.github);
-	$("#topContacts").append(formatedGit);
+	$("#topContacts").append(formattedGit);
+	var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+	$("#topContacts").append(formattedTwitter);
+	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+	$("#topContacts").append(formattedLocation);
 	//RESTART with rest of contact info
 	if(bio.skills.length > 0) {
 		$("#header").append(HTMLskillsStart);
