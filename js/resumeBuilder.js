@@ -210,7 +210,7 @@ var education = {
 			"name": "Gustavus Adolphus College",
 			"location": "St. Peter, MN, US",
 			"degree": "BA",
-			"majors": ["Studio Art", "Political Science"],
+			"majors": "Studio Art & Political Science",
 			"dates": "Fall 1999 - Spring 2003",
 			"url": "https://gustavus.edu/"
 		},
@@ -222,15 +222,37 @@ var education = {
 			"dates": "Fall 2006 - Spring 2009",
 			"url": "http://www.law.gmu.edu/"
 		},
-	]	
-};
-
-var onlineClasses = {
+	],
+	"onlineClasses": {
 			"title": "Front-End Web Developer Nanodegree",
 			"school": "Udacity",
 			"date": "2015",
 			"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
+	}	
 };
+
+education.display = function() {
+	for(school in education.schools) {
+		$("#education").append(HTMLschoolStart);
+
+		var formattedName = HTMLschoolName.replace("%data%", education.schools[school].name);
+		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+		var formattedNameandDegree = formattedName + formattedDegree;
+		$(".education-entry:last").append(formattedNameandDegree);
+		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+		$(".education-entry:last").append(formattedDates);
+		var formattedMajors = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
+		$(".education-entry:last").append(formattedMajors);
+		var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+		$(".education-entry:last").append(formattedLocation);
+	}
+}
+
+education.display();
+
+
+
+
 
 $(document).click(function(loc) {
   var x = loc.pageX;
