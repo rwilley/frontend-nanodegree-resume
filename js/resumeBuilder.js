@@ -1,30 +1,59 @@
-var name = "Rob Willey";
-var formattedName = HTMLheaderName.replace("%data%", name);
+//var name = "Rob Willey";
+//var formattedName = HTMLheaderName.replace("%data%", name);
 
 
-var role = "Web Developer";
-var formattedRole = HTMLheaderRole.replace("%data%", role);
+//var role = "Web Developer";
+//var formattedRole = HTMLheaderRole.replace("%data%", role);
 
-$("#header").append(formattedRole);
-$("#header").prepend(formattedName);
+//$("#header").append(formattedRole);
+//$("#header").prepend(formattedName);
 
 var bio = {
 	"name": "Rob Willey",
 	"role": "Web Developer",
 	"welcomeMessage": "Welcome to my resume! Please explore and feel free to contact me with any questions.",
 	"contacts": {
-		"mobile": 612-226-8448,
+		"mobile": "612-226-8448",
 		"email": "rwilleyart@gmail.com",
 		"github": "rwilley",
 		"twitter": "rwilley",
 		"location": "Washington, DC"
 	},
 	"skills": [
-		"Website design and creation", "Search Engine Optimization"
+		"Website design and creation", "Search Engine Optimization", "User Experience"
 		],
 	"biopic": "images/profile.jpg"
 	//display: function taking no paramaters
 };
+bio.display = function(){
+	//At top is another way, that looks better, to display role and name
+	var formattedRole =  HTMLheaderRole.replace("%data%", bio.role);
+	$("#header").prepend(formattedRole);
+	var formattedName = HTMLheaderName.replace("%data%", bio.name);
+	$("#header").prepend(formattedName);
+	var formattedMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+	$("#header").append(formattedMessage);
+	//var formattedContacts = HTMLcontactGeneric.replace("%d%", contacts); NOT sure what this Generic thing is for
+	//$("#header").append(formattedContacts);
+	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+	$("#topContacts").append(formattedMobile);
+	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+	$("#topContacts").append(formattedEmail);
+	var formattedGit = HTMLgithub.replace("%data%", bio.contacts.github);
+	$("#topContacts").append(formatedGit);
+	//RESTART with rest of contact info
+	if(bio.skills.length > 0) {
+		$("#header").append(HTMLskillsStart);
+		var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
+		$("#skills").append(formattedSkill);
+		var formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
+		$("#skills").append(formattedSkill);
+		var formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
+		$("#skills").append(formattedSkill);
+	}
+}
+
+bio.display();
 
 var work = {
 	"jobs": [
@@ -107,6 +136,23 @@ var work = {
 		}
 	]
 };
+function displayWork() {
+		for(job in work.jobs) {
+		$("#workExperience").append(HTMLworkStart);
+		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+		var formattedEmployerTitle = formattedEmployer + formattedTitle;
+		$(".work-entry:last").append(formattedEmployerTitle);
+		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+		$(".work-entry:last").append(formattedDates);
+		var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+		$(".work-entry:last").append(formattedLocation);
+		var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+		$(".work-entry:last").append(formattedDescription);
+	};
+}
+
+displayWork();
 
 var projects = { 
 	"projects": [
@@ -120,28 +166,34 @@ var projects = {
 		"title": "placeholder",
 		"dates": "2015",
 		"description": "placeholder",
-		"images": ["http://placehold.it/350x150"]
+		"images": ["http://placehold.it/350x200"]
 		}
 	]
 };
+projects.display = function() {
+	for(project in projects.projects) {
+		$("#projects").append(HTMLprojectStart);
 
-var bio = {
-	"name": "Rob Willey",
-	"role": "Web Developer",
-	"welcomeMessage": "Welcome to my resume! Please explore and feel free to contact me with any questions.",
-	"contacts": {
-		"mobile": 612-226-8448,
-		"email": "rwilleyart@gmail.com",
-		"github": "rwilley",
-		"twitter": "rwilley",
-		"location": "Washington, DC"
-	},
-	"skills": [
-		"Website design and creation", "Search Engine Optimization", "User Experience"
-		],
-	"biopic": "images/profile.jpg"
-	//display: function taking no paramaters
+		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+		$(".project-entry:last").append(formattedTitle);
+		var formattedDate = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+		$(".project-entry:last").append(formattedDate);
+		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+		$(".project-entry:last").append(formattedDescription);
+		var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images);
+		$(".project-entry:last").append(formattedImage);
+
+		if(projects.projects[project].images.length > 0) {
+			for(image in projects.projects[project].images) {
+				var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+				$(".project-entry:last").append(formattedImage);
+			}
+		}	
+	}
 };
+
+projects.display();
+
 
 var education = {
 	"schools": [
@@ -167,37 +219,9 @@ var education = {
 var onlineClasses = {
 			"title": "Front-End Web Developer Nanodegree",
 			"school": "Udacity",
-			"dates": "2015",
+			"date": "2015",
 			"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
 };
-
-if(bio.skills.length > 0) {
-	$("#header").append(HTMLskillsStart);
-	var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-	$("#skills").append(formattedSkill);
-	var formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-	$("#skills").append(formattedSkill);
-	var formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-	$("#skills").append(formattedSkill);
-}
-
-function displayWork() {
-		for(job in work.jobs) {
-		$("#workExperience").append(HTMLworkStart);
-		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-		var formattedEmployerTitle = formattedEmployer + formattedTitle;
-		$(".work-entry:last").append(formattedEmployerTitle);
-		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-		$(".work-entry:last").append(formattedDates);
-		var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-		$(".work-entry:last").append(formattedLocation);
-		var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-		$(".work-entry:last").append(formattedDescription);
-	};
-}
-
-displayWork();
 
 $(document).click(function(loc) {
   var x = loc.pageX;
@@ -205,30 +229,6 @@ $(document).click(function(loc) {
 
   logClicks(x,y);
 });
-
-projects.display = function() {
-	for(project in projects.projects) {
-		$("#projects").append(HTMLprojectStart);
-
-		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-		$(".project-entry:last").append(formattedTitle);
-		var formattedDate = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
-		$(".project-entry:last").append(formattedDate);
-		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
-		$(".project-entry:last").append(formattedDescription);
-		var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images);
-		$(".project-entry:last").append(formattedImage);
-
-		if(projects.projects[project].images.length > 0) {
-			for(image in projects.projects[project].images) {
-				var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
-				$(".project-entry:last").append(formattedImage);
-			}
-		}	
-	}
-};
-
-projects.display();
 
 $("#map-div").append(googleMap);
 
