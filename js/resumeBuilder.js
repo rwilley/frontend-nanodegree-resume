@@ -189,8 +189,8 @@ projects.display = function() {
 		$(".project-entry:last").append(formattedDate);
 		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
 		$(".project-entry:last").append(formattedDescription);
-		var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images);
-		$(".project-entry:last").append(formattedImage);
+		//var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+		//$(".project-entry:last").append(formattedImage);
 
 		if(projects.projects[project].images.length > 0) {
 			for(image in projects.projects[project].images) {
@@ -223,12 +223,20 @@ var education = {
 			"url": "http://www.law.gmu.edu/"
 		},
 	],
-	"onlineClasses": {
+	"onlineClasses": [
+		{
 			"title": "Front-End Web Developer Nanodegree",
 			"school": "Udacity",
-			"date": "2015",
+			"dates": "2015",
 			"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
-	}	
+		},
+		{
+			"title": "Place Holder U",
+			"school": "Udacity",
+			"dates": "2015",
+			"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
+		}
+	]	
 };
 
 education.display = function() {
@@ -245,6 +253,22 @@ education.display = function() {
 		$(".education-entry:last").append(formattedMajors);
 		var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
 		$(".education-entry:last").append(formattedLocation);
+	}
+
+	$("#education").append(HTMLonlineClasses);
+	$("#education").append(HTMLschoolStart);
+
+	for(onlineClass in education.onlineClasses) {
+		var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineClasses[onlineClass].title);
+		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineClasses[onlineClass].school);
+		var formattedTitleandSchool = formattedTitle + formattedSchool;
+		$(".education-entry:last").append(formattedTitleandSchool);
+		var formattedDates = HTMLonlineDates.replace("%data%", education.onlineClasses[onlineClass].dates);
+		$(".education-entry:last").append(formattedDates);
+		var formattedURL = HTMLonlineURL.replace("%data%", education.onlineClasses[onlineClass].url);
+		$(".education-entry:last").append(formattedURL);
+		//var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineClasses[onlineClass].title);
+		//RESTART by figuring out how to display below education yet under online class heading (could create seperate variable) $(".onlineClasses-entry:last").append(formattedTitle);
 	}
 }
 
