@@ -145,8 +145,8 @@ var work = {
 		}
 	]
 };
-function displayWork() {
-		for(job in work.jobs) {
+work.display = function() {
+	for(job in work.jobs) {
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
 		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
@@ -161,7 +161,7 @@ function displayWork() {
 	};
 }
 
-displayWork();
+work.display();
 
 var projects = { 
 	"projects": [
@@ -265,8 +265,6 @@ education.display = function() {
 		$(".education-entry:last").append(formattedDates);
 		var formattedURL = HTMLonlineURL.replace("%data%", education.onlineClasses[onlineClass].url);
 		$(".education-entry:last").append(formattedURL);
-		//var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineClasses[onlineClass].title);
-		//RESTART by figuring out how to display below education yet under online class heading (could create seperate variable) $(".onlineClasses-entry:last").append(formattedTitle);
 	}
 }
 
